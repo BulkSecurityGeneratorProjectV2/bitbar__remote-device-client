@@ -65,7 +65,7 @@ public class UsbmuxdSocketForwarding implements Runnable {
     public void run() {
         File privateKeyFile = null;
         try {
-            privateKeyFile = File.createTempFile(String.format(IDENTITY_NAME_FORMAT, connection.getDeviceSessionId()), ".key");
+            privateKeyFile = Files.createTempFile(String.format(IDENTITY_NAME_FORMAT, connection.getDeviceSessionId()), ".key").toFile();
             privateKeyPath = privateKeyFile.getAbsolutePath();
             privateKeyFile.deleteOnExit();
             FileUtils.writeByteArrayToFile(privateKeyFile, connection.getPassword().getBytes());
